@@ -1,5 +1,3 @@
-// @ts-nocheck
-
 import { Weapon } from "./Weapon";
 
 // @ts-expect-error
@@ -10,7 +8,7 @@ class WeaponWithImplementation extends Weapon {
 }
 
 describe("Weapon", () => {
-  let weapon;
+  let weapon: Weapon;
 
   beforeEach(() => {
     weapon = new WeaponWithImplementation("bow", 1, 0.5, 2, 1);

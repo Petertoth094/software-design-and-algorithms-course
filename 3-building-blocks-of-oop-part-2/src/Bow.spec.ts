@@ -1,9 +1,7 @@
-// @ts-nocheck
-
 import { Bow } from "./Bow";
 
 describe("Bow", () => {
-  let bow;
+  let bow: Bow;
 
   beforeEach(() => {
     bow = new Bow(100, 0.9, 1, 1);

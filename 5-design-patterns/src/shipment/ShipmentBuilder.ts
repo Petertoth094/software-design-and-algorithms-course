@@ -2,11 +2,11 @@ import {
   ShipmentMark,
   SHIPMENT_DECORATORS,
 } from '../decorators/shipment-decorators';
+import {getUniqueId} from '../getUniqueId';
 import {RawShipmentData} from '../mocks/shipment-data.mock';
 import {IShipper, Shipper} from '../shipper/shipper';
 import {Shipment} from './Shipment';
 export class ShipmentBuilder {
-  private static id = 0;
   constructor() {}
 
   public getShipment({
@@ -17,7 +17,7 @@ export class ShipmentBuilder {
     toZipCode,
     toAddress,
   }: RawShipmentData): Shipment {
-    const shipmentId = this.getUniqueId();
+    const shipmentId = getUniqueId();
     const shipper: IShipper = new Shipper(
       shipmentId,
       fromZipCode,
@@ -36,9 +36,5 @@ export class ShipmentBuilder {
         new SHIPMENT_DECORATORS[mark](shipment),
       shipment
     );
-  }
-
-  private getUniqueId() {
-    return ShipmentBuilder.id++;
   }
 }

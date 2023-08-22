@@ -18,7 +18,7 @@ export class PriorityQueue<T> implements PriorityQueueI<T> {
   }
 
   dequeue(): T {
-    return this.queue.removeMin();
+    return this.queue.poll();
   }
 
   size(): number {

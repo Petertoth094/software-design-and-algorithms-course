@@ -24,6 +24,6 @@ export class Scheduler implements SchedulerI {
       }
     }
 
-    await Promise.all(tasks.map((task) => task()));
+    tasks.forEach(async (task) => await task());
   }
 }

@@ -69,7 +69,7 @@ export class MinHeap<T> {
     }
   }
 
-  removeMin() {
+  poll() {
     if (this.heap.length === 0) {
       return undefined;
     }
@@ -79,7 +79,7 @@ export class MinHeap<T> {
     }
 
     const root = this.heap[0];
-    this.heap[0] = this.heap.pop()!;
+    this.heap[0] = this.heap.pop();
     this.heapifyDown();
 
     return root.data;

@@ -1,6 +1,6 @@
 // a little upgrade from the MinHeap below
 export class MinHeap<T> {
-  heap: [T, number][];
+  heap: {data: T; priority: number}[];
 
   constructor() {
     this.heap = [];
@@ -34,15 +34,15 @@ export class MinHeap<T> {
     return this.getParentIndex(index) >= 0;
   }
 
-  leftChild(index: number) {
+  getLeftChild(index: number) {
     return this.heap[this.getLeftChildIndex(index)];
   }
 
-  rightChild(index: number) {
+  getRightChild(index: number) {
     return this.heap[this.getRightChildIndex(index)];
   }
 
-  parent(index: number) {
+  getParent(index: number) {
     return this.heap[this.getParentIndex(index)];
   }
 
@@ -54,7 +54,7 @@ export class MinHeap<T> {
   }
 
   insert(data: T, priority: number) {
-    this.heap.push([data, priority]);
+    this.heap.push({data, priority});
     this.heapifyUp();
   }
 
@@ -62,7 +62,7 @@ export class MinHeap<T> {
     let index = this.size() - 1;
     while (
       this.hasParent(index) &&
-      this.parent(index)[1] > this.heap[index][1]
+      this.getParent(index).priority > this.heap[index].priority
     ) {
       this.swap(this.getParentIndex(index), index);
       index = this.getParentIndex(index);
@@ -75,14 +75,14 @@ export class MinHeap<T> {
     }
 
     if (this.heap.length === 1) {
-      return this.heap.pop()?.[0];
+      return this.heap.pop()?.data;
     }
 
     const root = this.heap[0];
     this.heap[0] = this.heap.pop()!;
     this.heapifyDown();
 
-    return root[0];
+    return root.data;
   }
 
   heapifyDown() {
@@ -92,12 +92,12 @@ export class MinHeap<T> {
 
       if (
         this.hasRightChild(index) &&
-        this.rightChild(index)[1] < this.leftChild(index)[1]
+        this.getRightChild(index).priority < this.getLeftChild(index).priority
       ) {
         smallerChildIndex = this.getRightChildIndex(index);
       }
 
-      if (this.heap[index][1] < this.heap[smallerChildIndex][1]) {
+      if (this.heap[index].priority < this.heap[smallerChildIndex].priority) {
         break;
       } else {
         this.swap(index, smallerChildIndex);
